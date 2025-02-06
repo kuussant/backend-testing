@@ -1,0 +1,29 @@
+name: Push to GitLab
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+    - 'backend/*'
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git configuration
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Push to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@https://version.helsinki.fi/kuussant/backend-testing.git
+          git push -u gitlab staging
