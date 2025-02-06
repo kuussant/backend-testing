@@ -26,5 +26,5 @@ jobs:
         env:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
         run: |
-          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@https://version.helsinki.fi/kuussant/backend-testing.git
+          git remote add gitlab https://oauth2:${GITLAB_TOKEN}@version.helsinki.fi/kuussant/backend-testing.git
           git push -u gitlab staging
